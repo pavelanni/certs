@@ -20,12 +20,12 @@ touch ${CA_DIR}/index.txt
 echo 1000 > ${CA_DIR}/serial
 
 # create the root key
-echo --- creating the ROOT CERT
+echo --- creating the ROOT KEY
 openssl genrsa -out ${CA_DIR}/private/ca.key.pem 4096 
 #openssl genrsa -aes256 -passout pass:password1 -out ${CA_DIR}/private/ca.key.pem 4096 
 #chmod 400 private/ca.key.pem
 
-echo --- creating the ROOT KEY
+echo --- creating the ROOT CERT
 # create the root cert
 openssl req -config "${DIR}/root_ca_openssl.cnf" \
       -key ${CA_DIR}/private/ca.key.pem \
@@ -68,11 +68,16 @@ openssl ca -config ${DIR}/root_ca_openssl.cnf -extensions v3_intermediate_ca \
       -out ${INTER_DIR}/certs/intermediate.cert.pem
       #-passin pass:intermed_csr \
       #-passin pass:password1 \
+chmod 444 ${INTER_DIR}/certs/intermediate.cert.pem
 
-
-# verify the chain
-echo --- verifying the Intermediate cert
+# verify the intermediate certificate
+echo --- verifying the intermediate certificate
 openssl verify -CAfile ${CA_DIR}/certs/ca.cert.pem \
       ${INTER_DIR}/certs/intermediate.cert.pem
 
+# create cert chain file
+echo --- creating the certificate chain file
+cat ${INTER_DIR}/certs/intermediate.cert.pem \
+	${CA_DIR}/certs/ca.cert.pem > ${INTER_DIR}/certs/ca-chain.cert.pem
+chmod 444 ${INTER_DIR}/certs/ca-chain.cert.pem
 
