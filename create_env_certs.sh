@@ -18,7 +18,7 @@ OUT_PATH="./ca/intermediate/newcerts/"
 while getopts ":d:o:g:h:" opt ; do
 	case $opt in
 		d)
-			echo "DOAMINANME: ${OPTARG}"
+			echo "DOMAINANME: ${OPTARG}"
 			DOMAINNAME="${OPTARG}"
       		;;
 		g)
