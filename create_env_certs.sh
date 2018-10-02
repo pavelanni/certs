@@ -61,7 +61,7 @@ then
     fi
 fi
 GUID_DOMAIN="${GUID}.${DOMAINNAME}"
-HOSTNAMES="${HOSTNAMES},certtest.${GUID_DOMAIN},*.apps.${GUID_DOMAIN}"
+HOSTNAMES="${HOSTNAMES},master.${GUID_DOMAIN},certtest.${GUID_DOMAIN},*.apps.${GUID_DOMAIN}"
 IFS=',' read -r -a HOSTNAMES_A <<< "${HOSTNAMES}"
 
 ##################
