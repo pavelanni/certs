@@ -2,7 +2,9 @@
 # This generates index.html from the files in the $1 directory
 
 cd $1
-rm index.html
+if [ -f index.html ] ; then
+    rm index.html
+fi
 echo '<!doctype html>' >> index.html
 echo '<html><head>' >> index.html
 echo '<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">' >> index.html
